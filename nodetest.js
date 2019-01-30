@@ -212,21 +212,55 @@
 
 //WRITE A FUNCTION THAT COUNTS THE NUMBER OF VOWELS IN A GIVEN STRING.
 //RETURN THE COUNT NUMBER
-function vowelCount(str) {
-  let letter = str.match(/[aeiou]/gi);
-  return letter === null ? 0 : letter.length;
+//function vowelCount(str) {
+//let letter = str.match(/[aeiou]/gi);
+//return letter === null ? 0 : letter.length;
+//}
+
+////const vowelCount = str =>
+////Array.from(str).filter(letter => "aeiou".includes(letter)).length;
+
+//console.log(vowelCount("-bcd-fgh-pqrst-vwxyz"));
+//console.log(vowelCount("Hello world!")); // <--- 3
+//console.log(vowelCount("Pinto beans")); // <--- 4
+//console.log(vowelCount("The quick brown fox jumped over the lazy dog.")); // <--- 12
+//console.log(
+//vowelCount(
+//"Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
+//)
+//); // <--- 58
+//console.log(vowelCount("All I have ever wanted is to be an Uber driver!")); // <--- 16
+
+// GIVEN A POSITIVE (OR0) NUMVER, RETURN STRING OF 1'S AND 0'S REPRESENTING IT'S
+// BINARY VALUE: TOBINARYSTRING(6) SHOULD RETURN "110" NO LEADING 0.  USE OF
+// NUMVER.TOSTRING(2) IS NOT ALLOWED
+
+function toBinaryString(num) {
+  let changed = [];
+  if (num !== 0) {
+    while (num >= 1) {
+      changed.unshift(num % 2);
+      num = Math.floor(num / 2);
+    }
+    return changed.join("");
+  } else {
+    return "0";
+  }
 }
-
-//const vowelCount = str =>
-//Array.from(str).filter(letter => "aeiou".includes(letter)).length;
-
-console.log(vowelCount("-bcd-fgh-pqrst-vwxyz"));
-console.log(vowelCount("Hello world!")); // <--- 3
-console.log(vowelCount("Pinto beans")); // <--- 4
-console.log(vowelCount("The quick brown fox jumped over the lazy dog.")); // <--- 12
-console.log(
-  vowelCount(
-    "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal."
-  )
-); // <--- 58
-console.log(vowelCount("All I have ever wanted is to be an Uber driver!")); // <--- 16
+console.log(toBinaryString(0)); // <--- 0
+console.log(toBinaryString(1)); // <--- 1
+console.log(toBinaryString(2)); // <--- 10
+console.log(toBinaryString(3)); // <--- 11
+console.log(toBinaryString(4)); // <--- 100
+console.log(toBinaryString(5)); // <--- 101
+console.log(toBinaryString(6)); // <--- 110
+console.log(toBinaryString(7)); // <--- 111
+console.log(toBinaryString(8)); // <--- 1000
+console.log(toBinaryString(9)); // <--- 1001
+console.log(toBinaryString(10)); // <--- 1010
+console.log(toBinaryString(11)); // <--- 1011
+console.log(toBinaryString(12)); // <--- 1100
+console.log(toBinaryString(13)); // <--- 1101
+console.log(toBinaryString(14)); // <--- 1110
+console.log(toBinaryString(15)); // <--- 1111
+console.log(toBinaryString(16)); // <--- 10000
