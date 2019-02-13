@@ -235,32 +235,119 @@
 // BINARY VALUE: TOBINARYSTRING(6) SHOULD RETURN "110" NO LEADING 0.  USE OF
 // NUMVER.TOSTRING(2) IS NOT ALLOWED
 
-function toBinaryString(num) {
-  let changed = [];
-  if (num !== 0) {
-    while (num >= 1) {
-      changed.unshift(num % 2);
-      num = Math.floor(num / 2);
-    }
-    return changed.join("");
-  } else {
-    return "0";
+//function toBinaryString(num) {
+//let changed = [];
+//if (num !== 0) {
+//while (num >= 1) {
+//changed.unshift(num % 2);
+//num = Math.floor(num / 2);
+//}
+//return changed.join("");
+//} else {
+//return "0";
+//}
+//}
+//console.log(toBinaryString(0)); // <--- 0
+//console.log(toBinaryString(1)); // <--- 1
+//console.log(toBinaryString(2)); // <--- 10
+//console.log(toBinaryString(3)); // <--- 11
+//console.log(toBinaryString(4)); // <--- 100
+//console.log(toBinaryString(5)); // <--- 101
+//console.log(toBinaryString(6)); // <--- 110
+//console.log(toBinaryString(7)); // <--- 111
+//console.log(toBinaryString(8)); // <--- 1000
+//console.log(toBinaryString(9)); // <--- 1001
+//console.log(toBinaryString(10)); // <--- 1010
+//console.log(toBinaryString(11)); // <--- 1011
+//console.log(toBinaryString(12)); // <--- 1100
+//console.log(toBinaryString(13)); // <--- 1101
+//console.log(toBinaryString(14)); // <--- 1110
+//console.log(toBinaryString(15)); // <--- 1111
+//console.log(toBinaryString(16)); // <--- 10000
+
+//ROMAN NUMBER FUNCTION
+//let romanIndex = [
+//[1000, "M"],
+//[900, "CM"],
+//[500, "D"],
+//[400, "CD"],
+//[100, "C"],
+//[90, "XC"],
+//[50, "L"],
+//[40, "XL"],
+//[10, "X"],
+//[9, "IX"],
+//[5, "V"],
+//[4, "IV"],
+//[1, "I"]
+//];
+
+//function romanNumeralize(n) {
+//if (n === 0) {
+//return "";
+//}
+//for (let i = 0; i < romanIndex.length; i++) {
+//if (n >= romanIndex[i][0]) {
+//return romanIndex[i][1] + romanNumeralize(n - romanIndex[i][0]);
+//}
+//}
+//}
+
+//console.log(romanNumeralize(1973));
+
+//DEEP EQUALITY
+const johnA = {
+  name: "John",
+  address: {
+    line1: "321 Anytown",
+    line2: "Stoke-on-Trent"
   }
-}
-console.log(toBinaryString(0)); // <--- 0
-console.log(toBinaryString(1)); // <--- 1
-console.log(toBinaryString(2)); // <--- 10
-console.log(toBinaryString(3)); // <--- 11
-console.log(toBinaryString(4)); // <--- 100
-console.log(toBinaryString(5)); // <--- 101
-console.log(toBinaryString(6)); // <--- 110
-console.log(toBinaryString(7)); // <--- 111
-console.log(toBinaryString(8)); // <--- 1000
-console.log(toBinaryString(9)); // <--- 1001
-console.log(toBinaryString(10)); // <--- 1010
-console.log(toBinaryString(11)); // <--- 1011
-console.log(toBinaryString(12)); // <--- 1100
-console.log(toBinaryString(13)); // <--- 1101
-console.log(toBinaryString(14)); // <--- 1110
-console.log(toBinaryString(15)); // <--- 1111
-console.log(toBinaryString(16)); // <--- 10000
+};
+
+const johnB = {
+  name: "John",
+  address: {
+    line1: "321 Anytown",
+    line2: "Stoke-on-Trent"
+  }
+};
+
+const johnC = {
+  name: "John Charles",
+  address: {
+    line1: "321 Anytown",
+    line2: "Stoke-on-Trent"
+  }
+};
+
+Object.compare = function(obj1, obj2) {
+  for (let p in obj1) {
+    if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
+
+    switch (typeof obj1[p]) {
+      case "object":
+        if (!Object.compare(obj1[p], obj2[p])) return false;
+        break;
+
+      case "function":
+        if (
+          typeof obj2[p] == "undefined" ||
+          (p != "compare" && obj1[p].toString() != obj2[p].toString())
+        )
+          return false;
+        break;
+
+      default:
+        if (obj1[p] != obj2[p]) return false;
+    }
+  }
+
+  for (let p in obj2) {
+    if (typeof obj1[p] == "undefined") return false;
+  }
+
+  return true;
+};
+
+console.log(Object.compare(johnA, johnB)); // true
+console.log(Object.compare(johnA, johnC)); // false
