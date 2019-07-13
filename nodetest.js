@@ -296,58 +296,83 @@
 //console.log(romanNumeralize(1973));
 
 //DEEP EQUALITY
-const johnA = {
-  name: "John",
-  address: {
-    line1: "321 Anytown",
-    line2: "Stoke-on-Trent"
-  }
-};
+//const johnA = {
+  //name: "John",
+  //address: {
+    //line1: "321 Anytown",
+    //line2: "Stoke-on-Trent"
+  //}
+//};
 
-const johnB = {
-  name: "John",
-  address: {
-    line1: "321 Anytown",
-    line2: "Stoke-on-Trent"
-  }
-};
+//const johnB = {
+  //name: "John",
+  //address: {
+    //line1: "321 Anytown",
+    //line2: "Stoke-on-Trent"
+  //}
+//};
 
-const johnC = {
-  name: "John Charles",
-  address: {
-    line1: "321 Anytown",
-    line2: "Stoke-on-Trent"
-  }
-};
+//const johnC = {
+  //name: "John Charles",
+  //address: {
+    //line1: "321 Anytown",
+    //line2: "Stoke-on-Trent"
+  //}
+//};
 
-Object.compare = function(obj1, obj2) {
-  for (let p in obj1) {
-    if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
+//Object.compare = function(obj1, obj2) {
+  //for (let p in obj1) {
+    //if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
 
-    switch (typeof obj1[p]) {
-      case "object":
-        if (!Object.compare(obj1[p], obj2[p])) return false;
-        break;
+    //switch (typeof obj1[p]) {
+      //case "object":
+        //if (!Object.compare(obj1[p], obj2[p])) return false;
+        //break;
 
-      case "function":
-        if (
-          typeof obj2[p] == "undefined" ||
-          (p != "compare" && obj1[p].toString() != obj2[p].toString())
-        )
-          return false;
-        break;
+      //case "function":
+        //if (
+          //typeof obj2[p] == "undefined" ||
+          //(p != "compare" && obj1[p].toString() != obj2[p].toString())
+        //)
+          //return false;
+        //break;
 
-      default:
-        if (obj1[p] != obj2[p]) return false;
+      //default:
+        //if (obj1[p] != obj2[p]) return false;
+    //}
+  //}
+
+  //for (let p in obj2) {
+    //if (typeof obj1[p] == "undefined") return false;
+  //}
+
+  //return true;
+//};
+
+//console.log(Object.compare(johnA, johnB)); // true
+//console.log(Object.compare(johnA, johnC)); // false
+
+//******CHRISTMAS TREE PROBLEM***********
+// write a function that takes a single number parameter and returns a tree
+// structure with *. ex output - >
+//  christmasTree(3)
+//  *
+// * *
+//* * *
+
+function christmastTree(x) {
+  let tree = "";
+  for (let i = 1; i <= x; i++) {
+    for (let j= 1; j <= x + x - 1; j++) {
+      if (j <= x - i || j >= x + i) {
+        tree += " ";
+      } else {
+        tree += "*"
+      }
     }
+    tree += "\n";
   }
+  return tree;
+}
 
-  for (let p in obj2) {
-    if (typeof obj1[p] == "undefined") return false;
-  }
-
-  return true;
-};
-
-console.log(Object.compare(johnA, johnB)); // true
-console.log(Object.compare(johnA, johnC)); // false
+console.log(christmastTree(8))
